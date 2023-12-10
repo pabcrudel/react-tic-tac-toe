@@ -26,3 +26,12 @@
   box-sizing: inherit;
 }
 
+body {
+  margin: 0 20px;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+}
