@@ -30,8 +30,29 @@ body {
   margin: 0 20px;
 }
 
-.game {
+/* Start Tic Tac Toe */
+.board {
+  width: fit-content;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2em;
+  gap: .5em;
 }
+
+.cell {
+  /* Create a square */
+  width: 75px;
+  height: 75px;
+
+  /* Border of the cell that uses font color as bg color */
+  border: 2px solid;
+  border-radius: 5px;
+
+  /* Stylize cursor when hovering */
+  cursor: pointer;
+
+  /* Center cell content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* End Tic Tac Toe */
