@@ -31,7 +31,13 @@ function App() {
   const [turnOwner, setTurnOwner] = useState(TURN.x)
 
   function updateBoard(position) {
-    // As the board contains primitives, I can clone it using spread operator
+    /** It's a bad idea to mutate directly the state:
+     * board[0] = 'x'
+     * instead of that, a better approach is to create a new value and use the
+     * mutation function (2nd item on the array)
+     * To do so, as the board contains primitives, it can be cloned using spread
+     * operator
+     */
     const newBoard = [...board]
 
     // Set the turn owner icon on this position and update the board
