@@ -1,8 +1,13 @@
-# React + Vite
+# React Tic Tac Toe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tic Tac Toe web game using Vite + React following the instructions of
+[Midudev](https://github.com/midudev/aprendiendo-react/tree/master/projects/02-tic-tac-toe)
 
-Currently, two official plugins are available:
+## The reason behind this project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+When I was doing the project [TDD with
+Vitest](https://github.com/pabcrudel/vitest-driven-development) following the
+tutorial of Midudev, I realized that React is so interesting. I'm confident with
+Vue so a lot of things of React where familiar to me. I decide to study in more
+detail this framework taking a look to another [React
+Tutorial 2:06:15](https://www.youtube.com/watch?v=qkzcjwnueLA) by him.
