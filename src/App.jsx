@@ -5,9 +5,9 @@ import { useState } from "react"
 */
 const TURN = {x: 'x', o: 'o'}
 
-function Cell({children, updateBoard}) {
+function Cell({children, isWinner, updateBoard}) {
   return (
-    <button className='cell' onClick={updateBoard}>
+    <button className='cell' onClick={updateBoard} disabled={isWinner}>
       <span>{children}</span>
     </button>
   )
@@ -30,6 +30,8 @@ function App() {
 
   const [turnOwner, setTurnOwner] = useState(TURN.x)
 
+  const [isWinner, setIsWinner] = useState(false)
+
   function updateBoard(position) {
     // Can't override positions that were selected before
     if (board[position]) return
@@ -47,8 +49,44 @@ function App() {
     newBoard[position] = turnOwner
     setBoard(newBoard)
 
+    if (checkWinner(newBoard)) {
+      setIsWinner(true)
+      return
+    }
+
     // Change turn owner
     setTurnOwner(turnOwner === TURN.x ? TURN.o : TURN.x)
+  }
+
+  function checkWinner(board) {
+    // Check rows
+    for (let i = 0; i <= 9; i += 3) {
+      if (check(i, i + 3, 1, board)) return true
+    }
+
+    // Check columns
+    for (let i = 0; i <= 9; i++) {
+      if (check(i, i + 7, 3, board)) return true
+    }
+    
+    // First diagonal
+    if (check(0, 9, 4, board)) return true
+
+    // Second diagonal
+    if (check(2, 7, 2, board)) return true
+
+    return false
+
+    function check(init, fin, update, board) {
+      let lastPiece = board[init];
+      let count = 1;
+      for (let i = init + update; i < fin; i += update) {
+        if (lastPiece && lastPiece === board[i]) count++
+        
+        if (count === 3) return true
+      }
+      return false
+    }
   }
 
   return (
@@ -65,6 +103,7 @@ function App() {
             board.map((cellContent, i) =>
               <Cell
                 key={i}
+                isWinner={isWinner}
                 updateBoard={() => updateBoard(i)}
               >
                 {cellContent}
