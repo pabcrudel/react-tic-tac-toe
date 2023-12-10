@@ -29,9 +29,9 @@ function App() {
         <h1>React Tic Tac Toe</h1>
       </header>
 
-      <main className="board">
+      <main>
         <h2>Board</h2>
-        <div className="game">
+        <div className="board">
           {
             board.map((cell, i) => <Cell key={i}>{i}</Cell>)
           }
