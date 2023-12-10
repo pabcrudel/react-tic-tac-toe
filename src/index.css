@@ -18,8 +18,7 @@
 
   font-size: 20px;
 
-  max-width: 75ch;
-  margin: auto;
+  text-align: center;
 }
 
 *, *::before, *::after {
@@ -34,6 +33,7 @@ body {
 .board {
   width: 375px;
   height: 375px;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
