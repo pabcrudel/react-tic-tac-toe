@@ -5,9 +5,9 @@ import { useState } from "react"
 */
 const TURN = {x: 'x', o: 'o'}
 
-function Cell({children, isWinner, updateBoard}) {
+function Cell({children, updateBoard, isFinish}) {
   return (
-    <button className='cell' onClick={updateBoard} disabled={isWinner}>
+    <button className='cell' onClick={updateBoard} disabled={isFinish}>
       <span>{children}</span>
     </button>
   )
@@ -30,7 +30,9 @@ function App() {
 
   const [turnOwner, setTurnOwner] = useState(TURN.x)
 
-  const [isWinner, setIsWinner] = useState(false)
+  const [isFinish, setIsFinish] = useState(false)
+
+  const [winner, setWinner] = useState(null)
 
   function updateBoard(position) {
     // Can't override positions that were selected before
@@ -50,7 +52,11 @@ function App() {
     setBoard(newBoard)
 
     if (checkWinner(newBoard)) {
-      setIsWinner(true)
+      setIsFinish(true)
+      setWinner(turnOwner)
+      return
+    } else if (checkTie(newBoard)) {
+      setIsFinish(true)
       return
     }
 
@@ -89,6 +95,17 @@ function App() {
     }
   }
 
+  function checkTie(board) {
+    return board.every(position => position !== null)
+  }
+
+  function reset() {
+    setBoard(Array(9).fill(null))
+    setTurnOwner(TURN.x)
+    setIsFinish(false)
+    setWinner(null)
+  }
+
   return (
     <>
       <header>
@@ -97,20 +114,25 @@ function App() {
 
       <main>
         <h2>Board</h2>
-        <p>Turn owner: {turnOwner}</p>
+        {
+          !isFinish ? <p>Turn owner: {turnOwner}</p> :
+            winner ? <p>The winner is {turnOwner}</p> :
+              <p>No winners</p>
+        }
         <div className="board">
           {
             board.map((cellContent, i) =>
               <Cell
                 key={i}
-                isWinner={isWinner}
                 updateBoard={() => updateBoard(i)}
+                isFinish={isFinish}
               >
                 {cellContent}
               </Cell>
             )
           }
         </div>
+        <button onClick={reset}>Reset</button>
       </main>
     </>
   )
