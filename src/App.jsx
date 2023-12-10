@@ -31,6 +31,9 @@ function App() {
   const [turnOwner, setTurnOwner] = useState(TURN.x)
 
   function updateBoard(position) {
+    // Can't override positions that were selected before
+    if (board[position]) return
+
     /** It's a bad idea to mutate directly the state:
      * board[0] = 'x'
      * instead of that, a better approach is to create a new value and use the
