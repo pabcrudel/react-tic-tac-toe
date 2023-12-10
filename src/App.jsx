@@ -113,12 +113,12 @@ function App() {
       </header>
 
       <main className="game">
-        <h2>Board</h2>
-        {
-          !isFinish ? <p>Turn owner: {turnOwner}</p> :
-            winner ? <p>The winner is {turnOwner}</p> :
-              <p>No winners</p>
-        }
+        <h2>
+          {
+            !isFinish ? `Turn owner: ${turnOwner}` :
+              winner ? `The winner is ${turnOwner}` : 'No winners'
+          }
+        </h2>
         <div className="board">
           {
             board.map((cellContent, i) =>
