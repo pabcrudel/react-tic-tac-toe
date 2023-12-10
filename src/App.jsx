@@ -1,28 +1,47 @@
+import { useState } from "react"
+
 /** Object containing 2 players and its icon
  * It's name is in Upper Case because it's value never changes
 */
 const TURN = {x: 'x', o: 'o'}
 
-/** An array of objects that will store game status
- * - At the beginning, is an array on `null`
- * - At the end could contain:
- *  [
- *    o, x, null,
- *    o, x, null,
- *    null, x, null
- *  ]
-*/
-const board = Array(9).fill(null)
-
-function Cell({children}) {
+function Cell({children, updateBoard}) {
   return (
-    <div className="cell">
-      {children}
-    </div>
+    <button className='cell' onClick={updateBoard}>
+      <span>{children}</span>
+    </button>
   )
 }
 
 function App() {
+  // Midudev called this variables "states".
+  /** An array of objects that will store game status
+   * - At the beginning, is an array on `null`
+   * - At the end could contain:
+   *  [
+   *    o, x, null,
+   *    o, x, null,
+   *    null, x, null
+   *  ]
+   * - [<variable name>, <fn to change it>]
+   * - useState() <= Allows to change the variable and sets a default value
+  */
+  const [board, setBoard] = useState(Array(9).fill(null))
+
+  const [turnOwner, setTurnOwner] = useState(TURN.x)
+
+  function updateBoard(position) {
+    // As the board contains primitives, I can clone it using spread operator
+    const newBoard = [...board]
+
+    // Set the turn owner icon on this position and update the board
+    newBoard[position] = turnOwner
+    setBoard(newBoard)
+
+    // Change turn owner
+    setTurnOwner(turnOwner === TURN.x ? TURN.o : TURN.x)
+  }
+
   return (
     <>
       <header>
@@ -31,9 +50,17 @@ function App() {
 
       <main>
         <h2>Board</h2>
+        <p>Turn owner: {turnOwner}</p>
         <div className="board">
           {
-            board.map((cell, i) => <Cell key={i}>{i}</Cell>)
+            board.map((cellContent, i) =>
+              <Cell
+                key={i}
+                updateBoard={() => updateBoard(i)}
+              >
+                {cellContent}
+              </Cell>
+            )
           }
         </div>
       </main>
