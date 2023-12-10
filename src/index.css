@@ -32,17 +32,15 @@ body {
 
 /* Start Tic Tac Toe */
 .board {
-  width: fit-content;
+  width: 375px;
+  height: 375px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   gap: .5em;
 }
 
 .cell {
-  /* Create a square */
-  width: 75px;
-  height: 75px;
-
   /* Border of the cell that uses font color as bg color */
   border: 2px solid;
   border-radius: 5px;
@@ -54,5 +52,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-size: xx-large;
+}
+
+.game > button {
+  margin-top: 1em;
+  font-size: large;
 }
 /* End Tic Tac Toe */

@@ -112,7 +112,7 @@ function App() {
         <h1>React Tic Tac Toe</h1>
       </header>
 
-      <main>
+      <main className="game">
         <h2>Board</h2>
         {
           !isFinish ? <p>Turn owner: {turnOwner}</p> :
