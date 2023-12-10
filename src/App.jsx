@@ -14,8 +14,15 @@ const TURN = {x: 'x', o: 'o'}
 */
 const board = Array(9).fill(null)
 
-function App() {
+function Cell({children}) {
+  return (
+    <div className="cell">
+      {children}
+    </div>
+  )
+}
 
+function App() {
   return (
     <>
       <header>
@@ -26,11 +33,7 @@ function App() {
         <h2>Board</h2>
         <div className="game">
           {
-            board.map((cell, i) =>
-              <div className="cell" key={i}>
-                <span className="cellContent">{i}</span>
-              </div>
-            )
+            board.map((cell, i) => <Cell key={i}>{i}</Cell>)
           }
         </div>
       </main>
