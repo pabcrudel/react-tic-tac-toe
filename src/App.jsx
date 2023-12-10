@@ -5,14 +5,6 @@ import { useState } from "react"
 */
 const TURN = {x: 'x', o: 'o'}
 
-function Cell({children, updateBoard, isFinish}) {
-  return (
-    <button className='cell' onClick={updateBoard} disabled={isFinish}>
-      <span>{children}</span>
-    </button>
-  )
-}
-
 function App() {
   // Midudev called this variables "states".
   /** An array of objects that will store game status
@@ -122,13 +114,14 @@ function App() {
         <div className="board">
           {
             board.map((cellContent, i) =>
-              <Cell
+              <button
                 key={i}
-                updateBoard={() => updateBoard(i)}
-                isFinish={isFinish}
+                className='cell'
+                onClick={() => updateBoard(i)}
+                disabled={isFinish}
               >
                 {cellContent}
-              </Cell>
+              </button>
             )
           }
         </div>
