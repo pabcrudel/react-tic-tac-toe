@@ -23,9 +23,21 @@ function App() {
    *    [o, o, x]
    *  ]
   */
-  const [board, setBoard] = useState(INITIAL_BOARD)
+  const [board, setBoard] = useState(() => {
+    const storedBoard = window.localStorage.getItem('board')
 
-  const [turnOwner, setTurnOwner] = useState(FIRST_TURN_OWNER)
+    // Initial value assigned depending on if there is one stored yet
+    return storedBoard ? JSON.parse(storedBoard) : INITIAL_BOARD
+  })
+
+  const [turnOwner, setTurnOwner] = useState(() => {
+    const storedTurnOwner = window.localStorage.getItem('turnOwner')
+
+    /* Using Nullish Coalescing, if `storedTurnOwner` is `null` or `undefined`
+     * then the initial value will be set
+    */
+    return storedTurnOwner ? JSON.parse(storedTurnOwner) : FIRST_TURN_OWNER
+  })
 
   const [isFinish, setIsFinish] = useState(false)
 
@@ -38,7 +50,6 @@ function App() {
     /** It's a bad idea to mutate directly the state. It's better to create a
      * new value and use the mutation function (2nd item on the array)
      */
-
     /** Using `cloneDeep` from `Lodash` to copy recursively */
     const newBoard = cloneDeep(board)
 
@@ -48,24 +59,47 @@ function App() {
 
     // Checking the current status of the game
     if (checkWinner(newBoard)) {
-      setIsFinish(true)
       setWinner(turnOwner)
       confetti()
+      endGame()
       return
     } else if (checkTie(newBoard)) {
-      setIsFinish(true)
+      endGame()
       return
     }
 
     // Change turn owner
-    setTurnOwner(turnOwner === TURN.x ? TURN.o : TURN.x)
+    const newTurnOwner = turnOwner === TURN.x ? TURN.o : TURN.x
+    setTurnOwner(newTurnOwner)
+
+    // Save game on Local Storage
+    window.localStorage.setItem('board', JSON.stringify(newBoard))
+    window.localStorage.setItem('turnOwner', JSON.stringify(newTurnOwner))
   }
 
+  /** Sets all the states to it's initial value and clears the Local Storage */
   function reset() {
     setBoard(INITIAL_BOARD)
     setTurnOwner(FIRST_TURN_OWNER)
     setIsFinish(false)
     setWinner(null)
+
+    clearStorage()
+  }
+
+  /** Removes all data stored on Local Storage */
+  function clearStorage() {
+    /** Local Storage can be cleaned using `window.localStorage.clear()`
+     * however, it's a bad idea because could erase all the stored data.
+     */
+    window.localStorage.removeItem('board')
+    window.localStorage.removeItem('turnOwner')
+  }
+
+  /** Finish the game and clears the Local Storage */
+  function endGame() {
+    setIsFinish(true)
+    clearStorage()
   }
 
   return (
