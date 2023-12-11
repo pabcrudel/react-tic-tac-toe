@@ -95,16 +95,21 @@ function App() {
             board.map((row, i) =>
               <div className="row" key={i}>
                 {
-                  row.map((cellContent, j) =>
-                    <button
-                      key={i + j}
-                      className='cell'
-                      onClick={() => updateBoard(i, j)}
-                      disabled={isFinish}
-                    >
-                      {cellContent}
-                    </button>
-                  )
+                  row.map((cellContent, j) => {
+                    const owner = !cellContent ? "" :
+                      cellContent === FIRST_TURN_OWNER ? " first" : " second"
+
+                    return (
+                      <button
+                        key={i + j}
+                        className={"cell" + owner}
+                        onClick={() => updateBoard(i, j)}
+                        disabled={isFinish}
+                      >
+                        {cellContent}
+                      </button>
+                    )
+                  })
                 }
               </div>
             )
