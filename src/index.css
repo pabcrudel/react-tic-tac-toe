@@ -56,11 +56,6 @@ body {
   /* Stylize cursor when hovering */
   cursor: pointer;
 
-  /* Center cell content */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   font-size: xx-large;
 }
 
