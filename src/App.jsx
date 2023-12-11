@@ -122,17 +122,17 @@ function App() {
               <div className="row" key={i}>
                 {
                   row.map((cellContent, j) => {
-                    const owner = !cellContent ? "" :
-                      cellContent === FIRST_TURN_OWNER ? " first" : " second"
+                    const owner = !cellContent ? "empty" :
+                      cellContent === FIRST_TURN_OWNER ? "first" : "second"
 
                     return (
                       <button
                         key={i + j}
-                        className={"cell" + owner}
+                        className={"cell " + owner}
                         onClick={() => updateBoard(i, j)}
                         disabled={isFinish}
                       >
-                        {cellContent}
+                        {cellContent ? cellContent : '-'}
                       </button>
                     )
                   })

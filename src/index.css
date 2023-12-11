@@ -71,6 +71,13 @@
 }
 
 /* Cell colored depending on it's owner */
+.cell.empty{
+  /* Empty cell hide it's content when CSS is enabled.
+   * This option is set because of graceful degradation:
+   * - If the CSS is disabled, the game is still playable
+  */
+  color: transparent;
+}
 .cell.first {
   background-color: lightblue;
 }
