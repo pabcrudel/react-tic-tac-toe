@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { cloneDeep } from "lodash"
+import confetti from "canvas-confetti"
 
 /** Object containing 2 players and its icon
  * It's name is in Upper Case because it's value never changes
@@ -60,6 +61,7 @@ function App() {
     if (checkWinner(newBoard)) {
       setIsFinish(true)
       setWinner(turnOwner)
+      confetti()
       return
     } else if (checkTie(newBoard)) {
       setIsFinish(true)
