@@ -1,4 +1,5 @@
 :root {
+  /* Store color pattern in variables to reuse them */
   --dark-color: #242424;
   --light-color: #ffffffde;
 
@@ -28,24 +29,28 @@
   box-sizing: inherit;
 }
 
-body {
-  margin: 0 20px;
-}
-
 /* Start Tic Tac Toe */
 .board {
-  width: 375px;
-  height: 375px;
+  /* Board size */
+  --board-size: 375px;
+  width: var(--board-size);
+  height: var(--board-size);
+
+  /* To center the board horizontal */
   margin: auto;
   display: grid;
+  /* Specified rows only because each row will specify it's column */
   grid-template-rows: repeat(3, 1fr);
-  gap: .5em;
+
+  /* The space between each row and in `.row` each cell */
+  --board-gap: .5em;
+  gap: var(--board-gap);
 }
 
 .row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: .5em;
+  gap: var(--board-gap);
 }
 
 .cell {
@@ -56,23 +61,29 @@ body {
   /* Stylize cursor when hovering */
   cursor: pointer;
 
+  /* Size based on the user's default font size */
   font-size: xx-large;
 }
 
+/* Disabled cell will get its default value */
 .cell:not(:disabled) {
   color: var(--dark-color);
 }
 
+/* Cell colored depending on it's owner */
 .cell.first {
   background-color: lightblue;
 }
-
 .cell.second {
   background-color: lightcoral;
 }
 
+/* Styles that apply only to a button which is direct son of the game
+ * - In this case: Reset button
+*/
 .game > button {
   margin-top: 1em;
+  padding: .5em 1em;
   font-size: large;
 }
 /* End Tic Tac Toe */
