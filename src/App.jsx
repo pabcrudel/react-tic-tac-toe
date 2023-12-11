@@ -77,13 +77,13 @@ function App() {
 
     function check(init, fin, update, board) {
       let lastPiece = board[init];
-      let count = 1;
+
+      if (!lastPiece) return false
+
       for (let i = init + update; i < fin; i += update) {
-        if (lastPiece && lastPiece === board[i]) count++
-        
-        if (count === 3) return true
+        if (lastPiece !== board[i]) return false
       }
-      return false
+      return true
     }
   }
 
