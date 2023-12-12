@@ -4,7 +4,7 @@ import confetti from "canvas-confetti"
 import { TURN, FIRST_TURN_OWNER, INITIAL_BOARD } from './constants'
 import { checkWinner, checkTie } from './utils/check-game-status'
 
-function App() {
+export function App() {
   /** Midudev called this variables "states".
    * - [<variable name>, <fn to change it>]
    * - useState() <= Allows to change the variable and sets a default value

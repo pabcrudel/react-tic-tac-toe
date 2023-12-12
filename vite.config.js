@@ -5,4 +5,7 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   base: './',
+  test: { // Vitest config
+    environment: 'happy-dom' // Emulates a web browser for testing purposes
+  }
 })
