@@ -3,46 +3,50 @@ export function checkWinner(board) {
   if (
     firstValue && (
       // First row
-      (firstValue === board[0][1] && firstValue === board[0][2]) ||
+      checkCells(firstValue, [board[0][1], board[0][2]]) ||
       // First diagonal
-      (firstValue === board[1][1] && firstValue === board[2][2]) ||
+      checkCells(firstValue, [board[1][1], board[2][2]]) ||
       // First column
-      (firstValue === board[1][0] && firstValue === board[2][0])
+      checkCells(firstValue, [board[1][0], board[2][0]])
     )
   ) return true
-  
+
   const firstRowSecondCol = board[0][1]
-  if (firstRowSecondCol && (
-      // Second column
-      firstRowSecondCol === board[1][1] && firstRowSecondCol === board[2][1]
-    )
+  if (firstRowSecondCol &&
+    // Second column
+    checkCells(firstRowSecondCol, [board[1][1], board[2][1]])
   ) return true
 
   const firstRowLastCol = board[0][2]
   if (
     firstRowLastCol && (
       // Last column
-      (firstRowLastCol === board[1][2] && firstRowLastCol === board[2][2]) ||
+      checkCells(firstRowLastCol, [board[1][2], board[2][2]]) ||
       // Last diagonal
-      (firstRowLastCol === board[1][1] && firstRowLastCol === board[2][0])
+      checkCells(firstRowLastCol, [board[1][1], board[2][0]])
     )
   ) return true
 
   const secondRowFirstCol = board[1][0]
-  if (secondRowFirstCol && (
-      // Second row
-      secondRowFirstCol === board[1][1] && secondRowFirstCol === board[1][2]
-    )
+  if (secondRowFirstCol &&
+    // Second row
+    checkCells(secondRowFirstCol, [board[1][1], board[1][2]])
   ) return true
 
   const lastRowFirstCol = board[2][0]
-  if (lastRowFirstCol && (
-      // Last row
-      lastRowFirstCol === board[2][1] && lastRowFirstCol === board[2][2]
-    )
+  if (lastRowFirstCol &&
+    // Last row
+    checkCells(lastRowFirstCol, [board[2][1], board[2][2]])
   ) return true
 
   return false
+}
+
+function checkCells(value, cells) {
+  for (const cell of cells) {
+    if (cell !== value) return false
+  }
+  return true
 }
 
 export function checkTie(board) {
