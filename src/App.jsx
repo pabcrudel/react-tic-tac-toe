@@ -82,7 +82,7 @@ function App() {
   }
 
   function checkCellStatus(i, j) {
-    if(isFinish) {
+    if(winnerPositions) {
       for (const position of winnerPositions) {
         if (i === position.i && j === position.j) return true
       }
