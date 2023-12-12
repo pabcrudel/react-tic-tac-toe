@@ -60,29 +60,24 @@
 
   /* Size based on the user's default font size */
   font-size: xx-large;
-}
 
-/* Disabled cell will get its default value */
-.cell:not(:disabled) {
-  color: var(--dark-color);
+  /* Font color equal to bg-color to hide empty cells content when CSS is
+   * enabled. This option is set because of graceful degradation:
+   * - If the CSS is disabled, the game is still playable
+  */
+  color: var(--dark-blue);
 }
 
 /* Cell colored depending on it's owner */
-.cell.empty{
-  /* Empty cell hide it's content when CSS is enabled.
-   * This option is set because of graceful degradation:
-   * - If the CSS is disabled, the game is still playable
-  */
-  color: transparent;
-}
 .cell.first {
   background-color: lightblue;
 }
 .cell.second {
   background-color: lightcoral;
 }
-.cell:disabled {
+.cell:disabled:not(.empty) {
   background-color: var(--dark-blue);
+  color: var(--light-color);
 }
 
 /* Styles that apply only to a button which is direct son of the game
@@ -92,6 +87,7 @@
   margin-top: 1em;
   padding: .5em 1em;
   font-size: large;
+  color: var(--light-color);
 }
 
 /* Border of the cells and the reset button of the same color as the font */
