@@ -31,14 +31,14 @@ export function checkWinner(board) {
   const secondRowFirstCol = board[1][0]
   if (secondRowFirstCol && (
       // Second row
-      (secondRowFirstCol === board[1][1] && secondRowFirstCol === board[1][2])
+      secondRowFirstCol === board[1][1] && secondRowFirstCol === board[1][2]
     )
   ) return true
 
   const lastRowFirstCol = board[2][0]
   if (lastRowFirstCol && (
       // Last row
-      (lastRowFirstCol === board[2][1] && lastRowFirstCol === board[2][2])
+      lastRowFirstCol === board[2][1] && lastRowFirstCol === board[2][2]
     )
   ) return true
 
