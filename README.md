@@ -34,7 +34,7 @@ To perform testing, you must add this script on `package.json` file.
 // package.json
 {
   "scripts": {
-    "test": "vitest"
+    "test": "vitest --reporter verbose"
   },
 }
 ```
