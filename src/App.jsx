@@ -43,6 +43,8 @@ function App() {
 
   const [winner, setWinner] = useState(null)
 
+  const [winnerPositions, setWinnerPositions] = useState(null)
+
   function updateBoard(row, column) {
     // Can't override positions that were selected before
     if (board[row][column]) return
@@ -58,7 +60,9 @@ function App() {
     setBoard(newBoard)
 
     // Checking the current status of the game
-    if (checkWinner(newBoard)) {
+    const winnerPositions = checkWinner(newBoard)
+    if (winnerPositions) {
+      setWinnerPositions(winnerPositions)
       setWinner(turnOwner)
       confetti()
       endGame()
@@ -77,12 +81,22 @@ function App() {
     window.localStorage.setItem('turnOwner', JSON.stringify(newTurnOwner))
   }
 
+  function checkCellStatus(i, j) {
+    if(isFinish) {
+      for (const position of winnerPositions) {
+        if (i === position.i && j === position.j) return true
+      }
+    }
+    return false
+  }
+
   /** Sets all the states to it's initial value and clears the Local Storage */
   function reset() {
     setBoard(INITIAL_BOARD)
     setTurnOwner(FIRST_TURN_OWNER)
     setIsFinish(false)
     setWinner(null)
+    setWinnerPositions(null)
 
     clearStorage()
   }
@@ -125,12 +139,14 @@ function App() {
                     const owner = !cellContent ? "empty" :
                       cellContent === FIRST_TURN_OWNER ? "first" : "second"
 
+                    const isWinnerCell = checkCellStatus(i, j)
+
                     return (
                       <button
                         key={i + j}
                         className={"cell " + owner}
                         onClick={() => updateBoard(i, j)}
-                        disabled={isFinish}
+                        disabled={isFinish && !isWinnerCell}
                       >
                         {cellContent ? cellContent : '-'}
                       </button>

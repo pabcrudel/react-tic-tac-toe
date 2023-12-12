@@ -80,6 +80,9 @@
 .cell.second {
   background-color: lightcoral;
 }
+.cell:disabled {
+  background-color: unset;
+}
 
 /* Styles that apply only to a button which is direct son of the game
  * - In this case: Reset button
