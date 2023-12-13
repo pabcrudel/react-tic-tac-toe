@@ -31,8 +31,8 @@
   box-sizing: inherit;
 }
 
-/* Center all unless board's children depending on its content */
-*:not(.board *) {
+/* Center all unless the board and it's children depending on its content */
+body *:not(.board, .board *) {
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
