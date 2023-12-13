@@ -1,0 +1,54 @@
+:root {
+  /* Store color pattern in variables to reuse them */
+  --dark-color: #242424;
+  --dark-blue: #2b2a33;
+  --light-color: #ffffffde;
+
+  /* Start default styles */
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--light-color);
+  background-color: var(--dark-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* End default styles */
+
+  /* Increase default font size */
+  font-size: 20px;
+
+  /* Box sizes will include border and paddings */
+  box-sizing: border-box;
+}
+
+/* Inherit box sizing to allow rollbacks on any specific section */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Center all unless board's children depending on its content */
+*:not(.board *) {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer {
+  font-size: initial;
+
+  margin-top: 3rem;
+}
+footer aside {
+  margin-top: 2.5rem;
+}
+footer nav li {
+  list-style: none;
+}
+footer nav ul {
+  padding: 0;
+}

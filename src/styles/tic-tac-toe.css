@@ -1,0 +1,66 @@
+/* Start Tic Tac Toe */
+.board {
+  /* Board size */
+  --board-size: 375px;
+  width: var(--board-size);
+  height: var(--board-size);
+
+  /* To center the board horizontal */
+  margin: auto;
+  display: grid;
+  /* Specified rows only because each row will specify it's column */
+  grid-template-rows: repeat(3, 1fr);
+
+  /* The space between each row and in `.row` each cell */
+  --board-gap: .5em;
+  gap: var(--board-gap);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--board-gap);
+}
+
+.cell {
+  /* Stylize cursor when hovering */
+  cursor: pointer;
+
+  /* Size based on the user's default font size */
+  font-size: xx-large;
+
+  /* Font color equal to bg-color to hide empty cells content when CSS is
+   * enabled. This option is set because of graceful degradation:
+   * - If the CSS is disabled, the game is still playable
+  */
+  color: var(--dark-blue);
+}
+
+/* Cell colored depending on it's owner */
+.cell.first {
+  background-color: lightblue;
+}
+.cell.second {
+  background-color: lightcoral;
+}
+.cell:disabled:not(.empty) {
+  background-color: var(--dark-blue);
+  color: var(--light-color);
+}
+
+.reset {
+  margin-top: 1em;
+  padding: .5em 1em;
+  font-size: large;
+  color: var(--light-color);
+  text-align: center;
+}
+
+/* Border of the cells and the reset button of the same color as the font */
+.cell, .reset {
+  border: 2px solid var(--light-color);
+  border-radius: 5px;
+  background-color: var(--dark-blue);
+  display: block;
+}
+/* End Tic Tac Toe */
