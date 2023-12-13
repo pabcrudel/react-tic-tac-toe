@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { cloneDeep } from "lodash"
 import confetti from "canvas-confetti"
-import { TURN, FIRST_TURN_OWNER, INITIAL_BOARD } from '../constants'
-import { checkWinner, checkTie } from '../utils/check-game-status'
+import { TURN, FIRST_TURN_OWNER, INITIAL_BOARD } from './constants'
+import { checkWinner, checkTie } from './utils/check-game-status'
+import './styles/tic-tac-toe.css'
 
 export default function TicTacToe() {
   /** Midudev called this variables "states".
@@ -117,7 +118,8 @@ export default function TicTacToe() {
   }
 
   return (
-    <main className="game">
+    <>
+
       <h2>
         {
           !isFinish ? `Turn owner: ${turnOwner}` :
@@ -154,6 +156,6 @@ export default function TicTacToe() {
       </div>
 
       <button onClick={reset} className="reset">Reset</button>
-    </main>
+    </>
   )
 }
